@@ -1,0 +1,34 @@
+# TB FHIR Phylogeny Pipeline
+
+This pipeline processes FHIR bundle JSON files containing Mycobacterium tuberculosis data to generate SNP distance matrices, phylogenetic trees, and transmission network visualizations.
+
+## Features
+
+- **Direct FHIR Genomics JSON input**
+- **Phylogenetic tree**
+- **Transmission network visualization:** Interactive graph and statistical plots (histogram, heatmap, violin plot).
+- **Clinical metadata integration:** Extracted from Bundle Genomics FHIR.
+
+## Usage
+
+### Requirements
+
+- [Nextflow](https://www.nextflow.io/)
+- Python 3.8+
+- Python packages: `biopython`, `pandas`, `networkx`, `pyvis`, `matplotlib`, `seaborn`
+
+Install Python dependencies:
+```bash
+pip install biopython pandas networkx pyvis matplotlib seaborn
+```
+
+### Run the Pipeline
+
+```bash
+nextflow run main.nf
+```
+
+### Input
+
+- Place FHIR Bundle Genomics JSON files in `data/JSON/`
+- Reference genome FASTA in `data/H37Rv.fasta`
