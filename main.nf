@@ -16,6 +16,6 @@ workflow {
     ref_ch = Channel.fromPath(params.reference, checkIfExists: true).first()
 
     PHYLO_ANALYSIS(fhir_ch, ref_ch)
-    VISUALIZATION(PHYLO_ANALYSIS.out.matrix, PHYLO_ANALYSIS.out.metadata)
+    VISUALIZATION(PHYLO_ANALYSIS.out.matrix, PHYLO_ANALYSIS.out.metadata, PHYLO_ANALYSIS.out.tree)
     VERSIONS()
 }
