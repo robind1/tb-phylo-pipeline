@@ -15,10 +15,10 @@ process VISUALIZE_REPORT {
 
     script:
     """
-    python3 ${projectDir}/scripts/visualize_results.py \\
+    python3 $baseDir/scripts/visualize_results.py \\
         --matrix ${matrix} \\
         --metadata ${metadata} \\
-        --threshold 12
+        --threshold ${params.snp_threshold}
     """
 }
 
