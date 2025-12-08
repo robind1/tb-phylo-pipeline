@@ -6,18 +6,21 @@ process VISUALIZE_REPORT {
     input:
     path matrix
     path metadata
+    path tree
 
     output:
     path "transmission_network.html", emit: network
     path "stats_histogram.png",       emit: hist
     path "stats_heatmap.png",         emit: heatmap
     path "stats_violin.png",          emit: violin
+    path "phylo_tree_colored.png",    emit: tree_plot
 
     script:
     """
     python3 $baseDir/scripts/visualize_results.py \\
         --matrix ${matrix} \\
         --metadata ${metadata} \\
+        --tree ${tree} \\
         --threshold ${params.snp_threshold}
     """
 }
@@ -26,7 +29,8 @@ workflow VISUALIZATION {
     take:
     matrix
     metadata
+    tree
 
     main:
-    VISUALIZE_REPORT(matrix, metadata)
+    VISUALIZE_REPORT(matrix, metadata, tree)
 }
