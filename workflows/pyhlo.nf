@@ -14,7 +14,7 @@ process FHIR_ANALYSIS {
 
     script:
     """
-    python3 ${projectDir}/scripts/fhir_phylo.py \\
+    python3 $baseDir/scripts/fhir_phylo.py \\
         --inputs ${fhir_files} \\
         --reference ${reference}
     """
