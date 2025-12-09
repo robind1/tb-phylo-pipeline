@@ -49,15 +49,18 @@ def parse_fhir(file_path):
 
             elif r_type == 'DiagnosticReport':
                 conclusions = []
-                if res.get('conclusion'):
-                    conclusions.append(res.get('conclusion'))
                 
                 for cc in res.get('conclusionCode', []):
                     if cc.get('text'):
                         conclusions.append(cc.get('text'))
+
+                if res.get('conclusion'):
+                    conclusions.append(res.get('conclusion'))
                 
                 if conclusions:
-                    metadata["conclusion"] = "; ".join(list(set(conclusions)))
+                    seen = set()
+                    unique_conclusions = [x for x in conclusions if not (x in seen or seen.add(x))]
+                    metadata["conclusion"] = "; ".join(unique_conclusions)
 
             elif r_type == 'Observation':
                 code_coding = res.get('code', {}).get('coding', [])
@@ -94,7 +97,6 @@ def main():
     sample_variants = {}
     all_metadata = []
 
-    # Parse all samples
     for f in args.inputs:
         sid, vars, meta = parse_fhir(f)
         sample_variants[sid] = vars
