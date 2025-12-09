@@ -13,7 +13,9 @@ process VISUALIZE_REPORT {
     path "stats_histogram.png",       emit: hist
     path "stats_heatmap.png",         emit: heatmap
     path "stats_violin.png",          emit: violin
-    path "phylo_tree_colored.png",    emit: tree_plot
+    path "phylo_tree_rectangular.png",    emit: tree_rect
+    path "phylo_tree_unrooted.png", emit: tree_unrooted
+    path "phylo_tree_circular.png", emit: tree_circ
 
     script:
     """
